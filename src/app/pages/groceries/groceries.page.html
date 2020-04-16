@@ -1,0 +1,29 @@
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Groceries</ion-label>
+      <ion-button fill="clear" mode="md" (click)="addGrocery()">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Create
+      </ion-button>
+    </ion-list-header>
+    <ion-item *ngFor="let grocery of groceries">
+      <ion-label (click)="_nav.navigateForward('grocery/'+grocery.id)">
+        <h1>{{grocery.assignedTo}}</h1>
+        <p>{{grocery.date}}</p>
+      </ion-label>
+      <ion-label class="ion-text-center custom" slot="end" (click)="_nav.navigateForward('grocery/'+grocery.id)">
+        <p>Items</p>
+        <p>{{grocery.items.length}}</p>
+      </ion-label>
+      <select [(ngModel)]="grocery.status" slot="end" (ngModelChange)="updateGrocery(grocery)">
+        <option [ngValue]=""></option>
+        <option *ngFor="let stat of stats" [ngValue]="stat.value">{{stat.name}}</option> 
+        <!-- ngValue in order to get exact value type instead of string -->
+      </select>
+      <ion-button fill="clear" size="small" slot="end" (click)="editGrocery(grocery)">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

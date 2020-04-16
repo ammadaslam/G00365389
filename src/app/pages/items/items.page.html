@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Items</ion-label>
+            <ion-button fill="clear" mode="md" (click)="addItem()">
+              <ion-icon  name="add-outline" slot="start"></ion-icon>
+              Add
+            </ion-button>
+          </ion-list-header>
+          <ion-item *ngFor="let item of items">
+            <ion-thumbnail *ngIf="(item.file | json) != '{}'" slot="start" (click)="_nav.navigateForward('item/'+item.id)">
+              <img [src]="item.file?.file_url" />
+            </ion-thumbnail>
+            <ion-label (click)="_nav.navigateForward('item/'+item.id)">
+              <h1>{{item.name}}</h1>
+              <p>{{item.description}}</p>
+            </ion-label>
+            <!-- future -->
+            <!-- <select [(ngModel)]="item.disabled" (ngModelChange)="updateItem(item)">
+              <option *ngFor="let stat of stats" [ngValue]="stat.value">{{stat.name}}</option> 
+            </select> -->
+            <ion-button fill="clear" size="small" slot="end" (click)="editItem(item)">
+              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

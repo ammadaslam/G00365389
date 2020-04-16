@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-button color="danger" fill="clear" mode="md" slot="end" (click)="deleteGrocery()">
+      <ion-icon slot="start" name="trash-outline"></ion-icon>
+      Delete
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngIf="grocery">
+    <ion-card-header>
+      <ion-card-subtitle>Assigned To:<ion-text class="custom">Date:</ion-text></ion-card-subtitle>
+      <ion-card-title>{{grocery.assignedTo}}<ion-text class="custom">{{grocery.date}}</ion-text></ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list-header>
+        <ion-label>
+          <h1>Items</h1>
+          <p>Check items if in cart...</p>
+        </ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let item of grocery.items">
+        <ion-thumbnail *ngIf="(item.file | json) != '{}'" slot="start">
+          <img [src]="item.file?.file_url" />
+        </ion-thumbnail>
+        <ion-label>
+          <h1>{{item.name}}</h1>
+          <p>{{item.description}}</p>
+        </ion-label>
+        <ion-checkbox [(ngModel)]="item.inCart" slot="end"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>
+    <ion-button [hidden]="grocery.status == 'canceled' || grocery.status == 'done'" expand="block" mode="md" (click)="updateGrocery()">
+      Done Grocery
+    </ion-button>
+  </ion-card>
+</ion-content>

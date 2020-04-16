@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-button color="danger" fill="clear" mode="md" slot="end" (click)="deleteItem()">
+      <ion-icon slot="start" name="trash-outline"></ion-icon>
+      Delete
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngIf="item">
+    <img *ngIf="(item.file | json) != '{}'" [src]="item.file?.file_url" alt="">
+    <ion-card-header>
+      <ion-card-title>{{item?.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{item.description}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

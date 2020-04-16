@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "skipLibCheck": true, //added to fix angularfire2 Type 'T[K]' does not satisfy the constraint '(...args: any) => any'.
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

@@ -1,3 +1,17 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="menu-content">
+    <ion-menu contentId="menu-content" menuId="menu-content" side="start" type="overlay">
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="primary">
+          <ion-title>myHome Grocery App</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-menu-toggle *ngFor="let nav of navs" auto-hide="false" (click)="_nav.navigateRoot(nav.url)">
+          <ion-item button>{{nav.name}}</ion-item>
+        </ion-menu-toggle>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>
