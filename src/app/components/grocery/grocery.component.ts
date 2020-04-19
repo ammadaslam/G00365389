@@ -1,3 +1,4 @@
+import { UsersService } from './../../services/users/users.service';
 import { GroceriesService } from './../../services/groceries/groceries.service';
 import { ItemsService } from './../../services/items/items.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,6 +17,8 @@ export class GroceryComponent implements OnInit {
   form : FormGroup;
 
   items : any = [];
+  
+  users : any = [];
 
   selected : any = [];
 
@@ -23,7 +26,8 @@ export class GroceryComponent implements OnInit {
     private _builder : FormBuilder,
     private _items   : ItemsService,
     private _groceries : GroceriesService,
-    private _modal   : ModalController
+    private _modal   : ModalController,
+    private _users   : UsersService
   ) { }
 
   async ngOnInit() {
@@ -34,6 +38,18 @@ export class GroceryComponent implements OnInit {
       items: new FormControl('', Validators.compose([Validators.required])),
       status: new FormControl('', Validators.compose([]))
     })
+
+    this._users.getUsers().then( users => {
+
+      if(users.length) {
+        users.forEach(user => {
+          user['full_name'] = user['first_name']+' '+user['last_name'];
+        });
+        this.users = users;
+      }
+
+    })
+
     await this._items.getItems().subscribe( items => {
       if(!items.length) {
         this.items = [];

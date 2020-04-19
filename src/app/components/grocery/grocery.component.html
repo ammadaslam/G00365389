@@ -8,9 +8,15 @@
   <ion-content class="ion-padding">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ion-item class="ion-no-padding">
+        <ion-label>Assigned To</ion-label>
+        <ion-select class="ion-text-right" required formControlName="assignedTo">
+          <ion-select-option *ngFor="let user of users" [value]="user.full_name">{{user.full_name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- <ion-item class="ion-no-padding">
         <ion-label>Assigned To <ion-text color="danger">*</ion-text></ion-label>
         <ion-input class="ion-text-right" required formControlName="assignedTo" type="text"></ion-input>
-      </ion-item>
+      </ion-item> -->
       <ion-item class="ion-no-padding">
         <ion-label>Date <ion-text color="danger">*</ion-text></ion-label>
         <ion-input class="ion-text-right" required formControlName="date" type="date"></ion-input>
